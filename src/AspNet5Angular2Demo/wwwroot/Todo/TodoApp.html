@@ -1,0 +1,46 @@
+﻿<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{title}}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container body-content">
+    <div class="jumbotron">
+        <h1>Todo</h1>
+        <span class="label label-warning">{{'Remaining items:'+ (remainingItemsCount)}}</span>
+
+        <h2>ToDo</h2>
+        <ul class="">
+            <li *ngFor="#item of unDoneItems" [class.selected]="item === selectedItem" (click)="onSelect(item)">
+                <input type="checkbox" (change)="onChange(item)" [(ngModel)]="item.isDone" title="Mark as done" />
+                <span class="label pointer" (click)="onSelect(item)" [ngClass]="setClass(item)">{{item.name}}</span>
+                <span class="label label-warning">{{item.itemType.name}}</span>
+            </li>
+        </ul>
+
+
+        <h2>Done</h2>
+        <ul class="">
+            <li *ngFor="#item of doneItems" [class.selected]="item === selectedItem" (click)="onSelect(item)">
+                <input type="checkbox" (change)="onChange(item)" [(ngModel)]="item.isDone" title="Mark as done" />
+                <span class="label pointer" (click)="onSelect(item)" [ngClass]="setClass(item)">{{item.name}}</span>
+                <span class="label label-warning">{{item.itemType.name}}</span>
+            </li>
+        </ul>
+
+
+    </div>
+    <!--END main-->
+
+</div>

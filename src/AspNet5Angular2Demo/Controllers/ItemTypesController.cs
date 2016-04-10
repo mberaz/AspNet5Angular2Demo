@@ -1,13 +1,16 @@
 ﻿
 using AspNet5Angular2Demo.Models;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.PlatformAbstractions;
 using System.Collections.Generic;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace AspNet5Angular2Demo.Controllers
 {
+    [Route("api/[controller]")]
     public class ItemTypesController :Controller
     {
+
         List<ItemType> list = new List<ItemType>
         {
             new ItemType{ Id= 1, Name= "Buy"  },
@@ -24,4 +27,5 @@ namespace AspNet5Angular2Demo.Controllers
             return list;
         }
     }
+
 }

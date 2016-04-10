@@ -104,6 +104,7 @@ var TodoApp = (function () {
     TodoApp.prototype.onChange = function (item) {
         item.isDone = !item.isDone;
         this.setDeafultItems();
+        this.remainingItemsCount = this.items.length - this.doneItems.length;
     };
     TodoApp.prototype.addItem = function (event) {
         this.addingNew = true;
@@ -183,4 +184,6 @@ var TodoApp = (function () {
     return TodoApp;
 }());
 exports.TodoApp = TodoApp;
+//"outDir": "../wwwroot/appScripts/",
+//    "rootDir": "../scripts/", 
 //# sourceMappingURL=App.Todo.js.map

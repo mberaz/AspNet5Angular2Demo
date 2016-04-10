@@ -1,5 +1,8 @@
-﻿/// <binding AfterBuild='moveToLibs' />
+﻿
+/// <binding AfterBuild='moveToLibs' />
 var gulp = require('gulp');
+
+
 
 gulp.task('moveToLibs', function (done) {
     gulp.src([
@@ -13,8 +16,13 @@ gulp.task('moveToLibs', function (done) {
       'node_modules/systemjs/dist/*.*',
       'node_modules/jquery/dist/jquery.*js',
       'node_modules/bootstrap/dist/js/bootstrap*.js',
-      'node_modules/rxjs/bundles/Rx.js'
+      'node_modules/rxjs/bundles/Rx.js',
+      'node_modules/angular2/http.js'
     ]).pipe(gulp.dest('./wwwroot/libs/'));
+
+    gulp.src([
+    'scripts/Todo/App.Todo.ts',
+    ]).pipe(gulp.dest('./wwwroot/appScripts/Todo'));
 
     gulp.src([
       'node_modules/bootstrap/dist/css/bootstrap.css'

@@ -1,50 +1,29 @@
-﻿
-enum ModalType { Alert, Prompt, Confirm };
-
-class ModelOpener
-{
-    bodyClass: string;
-    modalClass: string;
-    modelDisplay: string;
-    backDropDisplay: string;
-    cancelButtonDisplay: string;
-    modalHeader: string;
-    modalBody: string;
-    promtDisplay: string;
-    promptResult: string;
-    confirmResult: boolean;
-
-    modalOnOpenCallback: any;
-    modalOnClose: any;
-    modalType: ModalType;
-
-    constructor()
-    {
+var ModalType;
+(function (ModalType) {
+    ModalType[ModalType["Alert"] = 0] = "Alert";
+    ModalType[ModalType["Prompt"] = 1] = "Prompt";
+    ModalType[ModalType["Confirm"] = 2] = "Confirm";
+})(ModalType || (ModalType = {}));
+;
+var ModelOpener = (function () {
+    function ModelOpener() {
         this.hideModal();
     }
-
-    hidehtml()
-    {
+    ModelOpener.prototype.hidehtml = function () {
         this.bodyClass = "";
         this.modalClass = "";
         this.modelDisplay = "none";
         this.backDropDisplay = "none";
         this.cancelButtonDisplay = "none";
         this.promtDisplay = "none";
-    }
-
-    hideModal()
-    {
+    };
+    ModelOpener.prototype.hideModal = function () {
         this.hidehtml();
-
         this.modalBody = "";
         this.modalHeader = "";
-
         //on close
-        if (this.modalOnClose != null)
-        {
-            switch (this.modalType)
-            {
+        if (this.modalOnClose != null) {
+            switch (this.modalType) {
                 case ModalType.Alert:
                     this.modalOnClose();
                     break;
@@ -57,55 +36,49 @@ class ModelOpener
                     break;
             }
         }
-    }
-
-    cancelModal()
-    {
+    };
+    ModelOpener.prototype.cancelModal = function () {
         this.confirmResult = false;
         this.hidehtml();
-    }
-
-    showHtml(header: string, text: string, beforeOpenCallback: any = null, closeCallback: any = null)
-    {
+    };
+    ModelOpener.prototype.showHtml = function (header, text, beforeOpenCallback, closeCallback) {
+        if (beforeOpenCallback === void 0) { beforeOpenCallback = null; }
+        if (closeCallback === void 0) { closeCallback = null; }
         this.bodyClass = "modal-open";
         this.modalClass = "in";
         this.modelDisplay = "block";
         this.backDropDisplay = "block";
-
         this.modalBody = text;
         this.modalHeader = header;
         this.modalOnClose = closeCallback;
         this.modalOnOpenCallback = beforeOpenCallback;
         //before open
-        if (this.modalOnOpenCallback != null)
-        {
+        if (this.modalOnOpenCallback != null) {
             this.modalOnOpenCallback();
         }
-    }
-
-    alert(header: string, text: string, beforeOpenCallback: any = null, closeCallback: any = null)
-    {
+    };
+    ModelOpener.prototype.alert = function (header, text, beforeOpenCallback, closeCallback) {
+        if (beforeOpenCallback === void 0) { beforeOpenCallback = null; }
+        if (closeCallback === void 0) { closeCallback = null; }
         this.showHtml(header, text, beforeOpenCallback, closeCallback);
         this.cancelButtonDisplay = "none";
         this.modalType = ModalType.Alert;
-    }
-
-
-    prompt(header: string, text: string, beforeOpenCallback: any = null, closeCallback: any = null)
-    {
+    };
+    ModelOpener.prototype.prompt = function (header, text, beforeOpenCallback, closeCallback) {
+        if (beforeOpenCallback === void 0) { beforeOpenCallback = null; }
+        if (closeCallback === void 0) { closeCallback = null; }
         this.showHtml(header, text, beforeOpenCallback, closeCallback);
         this.cancelButtonDisplay = "inline-block";
         this.promtDisplay = "block";
         this.modalType = ModalType.Prompt;
-    }
-
-    confirm(header: string, text: string, beforeOpenCallback: any = null, closeCallback: any = null)
-    {
+    };
+    ModelOpener.prototype.confirm = function (header, text, beforeOpenCallback, closeCallback) {
+        if (beforeOpenCallback === void 0) { beforeOpenCallback = null; }
+        if (closeCallback === void 0) { closeCallback = null; }
         this.showHtml(header, text, beforeOpenCallback, closeCallback);
         this.cancelButtonDisplay = "inline-block";
-        this.modalType = ModalType.Confirm;  
-    }
-
-
-
-}
+        this.modalType = ModalType.Confirm;
+    };
+    return ModelOpener;
+}());
+//# sourceMappingURL=modelopener.js.map

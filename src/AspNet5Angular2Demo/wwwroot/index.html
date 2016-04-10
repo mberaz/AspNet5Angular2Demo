@@ -15,7 +15,9 @@
     <script src="libs/system.js"></script>
     <script src="libs/rx.js"></script>
     <script src="libs/angular2.dev.js"></script>
+    <script src="libs/http.dev.js"></script>
     <!-- 2. Configure SystemJS -->
+
     <script>
         System.config({
             packages: {
@@ -30,9 +32,6 @@
         System.import('appScripts/main')
               .then(null, console.error.bind(console));
 
-        //System.config({
-        //    packages: { 'appScripts/Todo': { defaultExtension: 'js' } }
-        //});
         System.import('appScripts/Todo/ListItem');
         System.import('appScripts/Todo/config');
         System.import('appScripts/Todo/common');
@@ -40,12 +39,11 @@
         System.import('appScripts/Todo/ModelOpener');
         System.import('appScripts/Todo/note');
         System.import('appScripts/Todo/note.component');
-        //System.import('appScripts/Todo/app');
     </script>
 
 </head>
 <body>
-    
+
     <my-app>Loading...</my-app>
 </body>
 </html>

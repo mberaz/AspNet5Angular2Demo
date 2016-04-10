@@ -9,6 +9,7 @@ using System.Net;
 
 namespace AspNet5Angular2Demo.Controllers
 {
+    [Route("api/[controller]")]
     public class NoteController :Controller
     {
         List<NoteModel> list = new List<NoteModel>
@@ -26,7 +27,7 @@ namespace AspNet5Angular2Demo.Controllers
             return list;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public NoteModel Get (int id)
         {
             return list.FirstOrDefault(n => n.Id == id);

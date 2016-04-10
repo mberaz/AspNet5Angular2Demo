@@ -1,4 +1,4 @@
-﻿/// <reference path="listitem.ts" />
+/// <reference path="listitem.ts" />
 /// <reference path="listitemtype.ts" />
 /// <reference path="config.ts" />
 /// <reference path="common.ts" />

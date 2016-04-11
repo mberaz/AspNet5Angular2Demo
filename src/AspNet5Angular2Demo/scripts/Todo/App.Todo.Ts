@@ -8,21 +8,24 @@
 
 
 import {Component} from 'angular2/core';
+import {OnInit} from 'angular2/core';
 import {Http, HTTP_BINDINGS, Headers, RequestOptions, Response} from "angular2/http";
 import {HTTP_PROVIDERS}    from 'angular2/http';
 import {Observable}     from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {NoteComponent} from './note.component';
+import {NoteService} from './note.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: "/Todo/TodoApp.html",
     providers: [
         HTTP_PROVIDERS,
+        NoteService
     ],
     directives: [NoteComponent]
 })
-export class TodoApp {
+export class TodoApp implements OnInit {
     title = 'MIchaels new TODO app';
 
     selectedItem: ListItem;
@@ -43,33 +46,34 @@ export class TodoApp {
     public unDoneItems: Array<ListItem>;
     public http: any;
     public options = new RequestOptions();
+    public noteService: NoteService;
 
-    constructor(http: Http) {
+    constructor(http: Http, _noteService: NoteService) {
         this.config = new Config();
         this.http = http;
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.options = new RequestOptions({ headers: this.headers });
-
+        this.noteService = _noteService;
         this.addingNew = false;
         this.searchTerm = "";
 
-        this.http.get(this.config.apiBaseUrl + "Note")
-            .map(res => res.json())
-            .subscribe(
-            data => this.loadNotes(data),
-            err => console.log(err),
-            () => { }
-            );
+        this.modal = new ModelOpener();
+    }
+
+    ngOnInit() {
+        this.noteService.getNotes().then(results => {
+            this.loadNotes(results[0]);
+        });
+
 
         var urls = [this.config.apiBaseUrl + "Todo", this.config.apiBaseUrl + "ItemTypes"];
+
         Promise.all(urls.map(url =>
             fetch(url).then(resp => resp.json())
         )).then(results => {
             this.loadTypes(results[0], results[1]);
         });
-
-        this.modal = new ModelOpener();
     }
 
     setDeafultItems() {
@@ -142,7 +146,7 @@ export class TodoApp {
     onChange(item: ListItem) {
         item.isDone = !item.isDone;
         this.setDeafultItems();
-        
+
     }
 
     addItem(event: any) {

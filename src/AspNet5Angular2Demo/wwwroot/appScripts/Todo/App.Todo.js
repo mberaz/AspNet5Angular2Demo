@@ -20,9 +20,9 @@ var http_1 = require("angular2/http");
 var http_2 = require('angular2/http');
 require('rxjs/Rx');
 var note_component_1 = require('./note.component');
+var note_service_1 = require('./note.service');
 var TodoApp = (function () {
-    function TodoApp(http) {
-        var _this = this;
+    function TodoApp(http, _noteService) {
         this.title = 'MIchaels new TODO app';
         this.items = new Array();
         this.types = new Array();
@@ -39,19 +39,23 @@ var TodoApp = (function () {
         this.headers = new http_1.Headers();
         this.headers.append('Content-Type', 'application/json');
         this.options = new http_1.RequestOptions({ headers: this.headers });
+        this.noteService = _noteService;
         this.addingNew = false;
         this.searchTerm = "";
-        this.http.get(this.config.apiBaseUrl + "Note")
-            .map(function (res) { return res.json(); })
-            .subscribe(function (data) { return _this.loadNotes(data); }, function (err) { return console.log(err); }, function () { });
+        this.modal = new ModelOpener();
+    }
+    TodoApp.prototype.ngOnInit = function () {
+        var _this = this;
+        this.noteService.getNotes().then(function (results) {
+            _this.loadNotes(results[0]);
+        });
         var urls = [this.config.apiBaseUrl + "Todo", this.config.apiBaseUrl + "ItemTypes"];
         Promise.all(urls.map(function (url) {
             return fetch(url).then(function (resp) { return resp.json(); });
         })).then(function (results) {
             _this.loadTypes(results[0], results[1]);
         });
-        this.modal = new ModelOpener();
-    }
+    };
     TodoApp.prototype.setDeafultItems = function () {
         this.doneItems = this.items.where(function (x) { return x.isDone; });
         this.unDoneItems = this.items.where(function (x) { return !x.isDone; });
@@ -175,10 +179,11 @@ var TodoApp = (function () {
             templateUrl: "/Todo/TodoApp.html",
             providers: [
                 http_2.HTTP_PROVIDERS,
+                note_service_1.NoteService
             ],
             directives: [note_component_1.NoteComponent]
         }), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, note_service_1.NoteService])
     ], TodoApp);
     return TodoApp;
 }());

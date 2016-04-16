@@ -1,8 +1,5 @@
-/// <reference path="../../node_modules/angular2/http.d.ts" />
 
 import {Injectable} from 'angular2/core';
-//import {Http, HTTP_BINDINGS, Headers, RequestOptions, Response, HTTP_PROVIDERS} from "angular2/http";
-//import {Observable}     from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 @Injectable()

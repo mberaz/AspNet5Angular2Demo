@@ -2,8 +2,8 @@
 import {Component } from 'angular2/core';
 import {TodoComponent} from './TodoComponent';
 import {DashboardComponent} from './DashboardComponent';
-import {UserListComponent} from './UserListComponent';
-import {UserEditComponent} from './UserEditComponent';
+import {UserListComponent} from './User/UserListComponent';
+import {UserEditComponent} from './User/UserEditComponent';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 @Component({
     selector: 'my-app',

@@ -9,7 +9,7 @@ import {UserService} from './User.service';
 
 @Component({
     selector: 'user-item',
-    templateUrl: "/Todo/UserEdit.html",
+    templateUrl: "/Todo/User/UserEdit.html",
 
     providers: [
         UserService

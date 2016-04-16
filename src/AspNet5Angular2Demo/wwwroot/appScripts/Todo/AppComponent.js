@@ -12,8 +12,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var TodoComponent_1 = require('./TodoComponent');
 var DashboardComponent_1 = require('./DashboardComponent');
-var UserListComponent_1 = require('./UserListComponent');
-var UserEditComponent_1 = require('./UserEditComponent');
+var UserListComponent_1 = require('./User/UserListComponent');
+var UserEditComponent_1 = require('./User/UserEditComponent');
 var router_1 = require('angular2/router');
 var AppComponent = (function () {
     function AppComponent() {

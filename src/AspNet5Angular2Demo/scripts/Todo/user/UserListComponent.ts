@@ -11,7 +11,7 @@ import { Router } from 'angular2/router';
 
 @Component({
     selector: 'my-dashboard',
-    templateUrl: "/Todo/userList.html",
+    templateUrl: "/Todo/User/userList.html",
     providers: [
         UserService
     ],

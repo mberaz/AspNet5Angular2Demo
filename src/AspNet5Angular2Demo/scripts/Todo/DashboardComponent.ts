@@ -3,7 +3,7 @@
 
 import {NoteComponent} from './note.component';
 import {NoteService} from './note.service';
-import { Component } from 'angular2/core';
+import {Component } from 'angular2/core';
 import {OnInit} from 'angular2/core';
 
 @Component({

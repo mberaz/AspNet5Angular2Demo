@@ -9,18 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var NoteComponent = (function () {
-    function NoteComponent() {
+var UserService = (function () {
+    function UserService() {
     }
-    NoteComponent = __decorate([
-        core_1.Component({
-            selector: 'note-item',
-            templateUrl: "/Todo/noteItem.html",
-            inputs: ['note']
-        }), 
+    UserService.prototype.getUsers = function () {
+        var config = new Config();
+        var urls = [config.apiBaseUrl + "User"];
+        return Promise.all(urls.map(function (url) {
+            return fetch(url).then(function (resp) { return resp.json(); });
+        }));
+    };
+    ;
+    UserService.prototype.getUser = function (id) {
+        var config = new Config();
+        var urls = [config.apiBaseUrl + "User/" + id];
+        return Promise.all(urls.map(function (url) {
+            return fetch(url).then(function (resp) { return resp.json(); });
+        }));
+    };
+    ;
+    UserService = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], NoteComponent);
-    return NoteComponent;
+    ], UserService);
+    return UserService;
 }());
-exports.NoteComponent = NoteComponent;
-//# sourceMappingURL=note.component.js.map
+exports.UserService = UserService;
+//# sourceMappingURL=usersservice.js.map

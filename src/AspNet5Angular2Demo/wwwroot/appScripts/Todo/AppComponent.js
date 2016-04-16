@@ -12,6 +12,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var TodoComponent_1 = require('./TodoComponent');
 var DashboardComponent_1 = require('./DashboardComponent');
+var UserListComponent_1 = require('./UserListComponent');
+var UserEditComponent_1 = require('./UserEditComponent');
 var router_1 = require('angular2/router');
 var AppComponent = (function () {
     function AppComponent() {
@@ -38,6 +40,16 @@ var AppComponent = (function () {
                 name: 'Todo',
                 component: TodoComponent_1.TodoComponent
             },
+            {
+                path: '/user',
+                name: 'User',
+                component: UserListComponent_1.UserListComponent
+            },
+            {
+                path: '/user/:id',
+                name: 'UserDetail',
+                component: UserEditComponent_1.UserEditComponent
+            }
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

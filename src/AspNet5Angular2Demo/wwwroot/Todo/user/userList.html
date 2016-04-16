@@ -1,5 +1,5 @@
 <ul class="users">
-    <li *ngFor="#user of Users; #i=index" class="" (click)="gotoDetail(user)">
+    <li *ngFor="#user of Users; #i=index" (click)="gotoDetail(user)">
         <user-item [user]="user"></user-item>
     </li>
 </ul>

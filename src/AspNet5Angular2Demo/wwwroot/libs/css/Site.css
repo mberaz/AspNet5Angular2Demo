@@ -41,5 +41,11 @@ textarea {
 }
 
 .pointer {
-    cursor: pointer;
+    cursor: pointer !important;
+}
+
+
+.ng-invalid
+{
+    border:1px solid #cc2b2b;
 }

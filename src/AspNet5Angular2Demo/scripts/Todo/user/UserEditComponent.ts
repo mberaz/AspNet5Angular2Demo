@@ -36,4 +36,7 @@ export class UserEditComponent implements OnInit {
     goBack() {
         window.history.back();
     }
+
+    SaveNewUser(user: User) {
+    }
 }

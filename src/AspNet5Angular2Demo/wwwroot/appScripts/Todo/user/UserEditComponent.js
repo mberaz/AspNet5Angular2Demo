@@ -29,6 +29,8 @@ var UserEditComponent = (function () {
     UserEditComponent.prototype.goBack = function () {
         window.history.back();
     };
+    UserEditComponent.prototype.SaveNewUser = function (user) {
+    };
     UserEditComponent = __decorate([
         core_1.Component({
             selector: 'user-item',

@@ -24,9 +24,6 @@ var AppComponent = (function () {
             selector: 'my-app',
             templateUrl: "/Todo/TodoApp.html",
             directives: [router_1.ROUTER_DIRECTIVES],
-            providers: [
-                router_1.ROUTER_PROVIDERS,
-            ]
         }),
         router_1.RouteConfig([
             {

@@ -9,17 +9,14 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router
     selector: 'my-app',
     templateUrl: "/Todo/TodoApp.html",
     directives: [ROUTER_DIRECTIVES],
-    providers: [
-        ROUTER_PROVIDERS,
-    ]
-
 })
 @RouteConfig([
+
     {
         path: '/dashboard',
         name: 'Dashboard',
         component: DashboardComponent,
-        useAsDefault: true
+        useAsDefault: true 
     },
     {
         path: '/todo',

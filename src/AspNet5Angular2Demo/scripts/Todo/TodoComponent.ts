@@ -1,10 +1,10 @@
-﻿/// <reference path="listitem.ts" />
+/// <reference path="listitem.ts" />
 /// <reference path="listitemtype.ts" />
 /// <reference path="config.ts" />
 /// <reference path="common.ts" />
-/// <reference path="note.component.ts" />
+
 /// <reference path="modelopener.ts" />
-/// <reference path="note.ts" />
+
 
 
 import {Component} from 'angular2/core';
@@ -13,20 +13,17 @@ import {Http, HTTP_BINDINGS, Headers, RequestOptions, Response} from "angular2/h
 import {HTTP_PROVIDERS}    from 'angular2/http';
 import {Observable}     from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {NoteComponent} from './note.component';
-import {NoteService} from './note.service';
+
 
 @Component({
-    selector: 'my-app',
-    templateUrl: "/Todo/TodoApp.html",
+    selector: 'my-todoComponent',
+    templateUrl: "/Todo/todoComponent.html",
     providers: [
-        HTTP_PROVIDERS,
-        NoteService
-    ],
-    directives: [NoteComponent]
+        HTTP_PROVIDERS
+    ]
 })
-export class TodoApp implements OnInit {
-    title = 'MIchaels new TODO app';
+export class TodoComponent implements OnInit {
+    
 
     selectedItem: ListItem;
     public newItem: ListItem;
@@ -46,15 +43,15 @@ export class TodoApp implements OnInit {
     public unDoneItems: Array<ListItem>;
     public http: any;
     public options = new RequestOptions();
-    public noteService: NoteService;
+    
 
-    constructor(http: Http, _noteService: NoteService) {
+    constructor(http: Http) {
         this.config = new Config();
         this.http = http;
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.options = new RequestOptions({ headers: this.headers });
-        this.noteService = _noteService;
+        
         this.addingNew = false;
         this.searchTerm = "";
 
@@ -62,10 +59,6 @@ export class TodoApp implements OnInit {
     }
 
     ngOnInit() {
-        this.noteService.getNotes().then(results => {
-            this.loadNotes(results[0]);
-        });
-
 
         var urls = [this.config.apiBaseUrl + "Todo", this.config.apiBaseUrl + "ItemTypes"];
 
@@ -82,12 +75,6 @@ export class TodoApp implements OnInit {
         this.remainingItemsCount = this.unDoneItems.length;
     }
 
-    loadNotes = function (data: any) {
-        this.notes = new Array<Note>();
-        for (var i = 0; i < data.length; i++) {
-            this.notes.push(new Note(data[i].Id, data[i].Text, data[i].Color));
-        }
-    }
 
     loadTypes(itemList: any, typeList: any) {
         for (var i = 0; i < typeList.length; i++) {

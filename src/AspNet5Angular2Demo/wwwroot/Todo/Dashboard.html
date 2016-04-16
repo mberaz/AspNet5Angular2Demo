@@ -1,0 +1,12 @@
+ <!--notes-->
+
+<h1>Dashboard!</h1>
+<h2>notes</h2>
+
+<ul class="notes">
+    <li *ngFor="#note of notes; #i=index" class="">
+        <note-item [note]="note"></note-item>
+    </li>
+</ul>
+
+<!-- end notes-->

@@ -8,44 +8,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+/// <reference path="todocomponent.ts" />
 var core_1 = require('angular2/core');
-var Hero = (function () {
-    function Hero() {
-    }
-    return Hero;
-}());
-exports.Hero = Hero;
+var TodoComponent_1 = require('./TodoComponent');
+var DashboardComponent_1 = require('./DashboardComponent');
+var router_1 = require('angular2/router');
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'Tour of Heroes';
-        //hero = 'Windstorm';
-        this.hero = {
-            id: 1,
-            name: 'Windstorm'
-        };
-        this.heroes = HEROES;
+        this.title = 'MIchaels new TODO app';
     }
-    AppComponent.prototype.onSelect = function (hero) { this.selectedHero = hero; };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            templateUrl: "/Heroes/HerosApp.html",
-        }), 
+            templateUrl: "/Todo/TodoApp.html",
+            directives: [router_1.ROUTER_DIRECTIVES],
+            providers: [
+                router_1.ROUTER_PROVIDERS,
+            ]
+        }),
+        router_1.RouteConfig([
+            {
+                path: '/dashboard',
+                name: 'Dashboard',
+                component: DashboardComponent_1.DashboardComponent,
+                useAsDefault: true
+            },
+            {
+                path: '/todo',
+                name: 'Todo',
+                component: TodoComponent_1.TodoComponent
+            },
+        ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-var HEROES = [
-    { "id": 11, "name": "Mr. Nice" },
-    { "id": 12, "name": "Narco" },
-    { "id": 13, "name": "Bombasto" },
-    { "id": 14, "name": "Celeritas" },
-    { "id": 15, "name": "Magneta" },
-    { "id": 16, "name": "RubberMan" },
-    { "id": 17, "name": "Dynama" },
-    { "id": 18, "name": "Dr IQ" },
-    { "id": 19, "name": "Magma" },
-    { "id": 20, "name": "Tornado" }
-];
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=AppComponent.js.map

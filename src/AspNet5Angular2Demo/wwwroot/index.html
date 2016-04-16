@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <base href="/">
     <meta charset="utf-8" />
     <title>Angular 2 with ASP.NET 5</title>
     <link href="libs/css/bootstrap.css" rel="stylesheet" />
@@ -16,6 +17,7 @@
     <script src="libs/rx.js"></script>
     <script src="libs/angular2.dev.js"></script>
     <script src="libs/http.dev.js"></script>
+    <script src="libs/router.dev.js"></script>
     <!-- 2. Configure SystemJS -->
 
     <script>
@@ -32,6 +34,7 @@
         System.import('appScripts/main')
               .then(null, console.error.bind(console));
 
+        System.import('appScripts/Todo/TodoComponent');
         System.import('appScripts/Todo/ListItem');
         System.import('appScripts/Todo/config');
         System.import('appScripts/Todo/common');
@@ -41,8 +44,9 @@
         System.import('appScripts/Todo/note.component');
 
     </script>
-
+  
 </head>
+
 <body>
 
     <my-app>Loading...</my-app>

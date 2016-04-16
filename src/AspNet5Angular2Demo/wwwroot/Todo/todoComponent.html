@@ -1,0 +1,110 @@
+
+    <div class="jumbotron">
+        <!--  search-->
+        <div>
+            <label class="label label-success">Search</label>
+            <input type="text" (keyup)="search(searchTerm)" [(ngModel)]="searchTerm" placeholder="Search" />
+
+            <span *ngFor="#type of types">
+                <input type="checkbox" (click)="toggleTypeFilter(type)" /> {{type.name}}
+            </span>
+        </div>
+
+        <!-- end search-->
+
+        <button type="button" class="btn btn-success" (click)="addItem( $event,'newItemNames')">Add new item</button>
+
+        <div *ngIf="addingNew">
+            <h2>New item details!</h2>
+            <div>
+                <label>name: </label>
+                <input [(ngModel)]="newItem.name" placeholder="name" />
+            </div>
+            <div>
+                <label>type: </label>
+                <select [(ngModel)]="newItem.itemType.id" (change)="newItemTypeChange($event)">
+                    <option value="0">
+                        Select a type
+                    </option>
+                    <option *ngFor="#type of types" value="{{type.id}}">{{type.name}}</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-success" (click)="SaveNewItem(newItem)" #newItemName>Save</button>
+            <button type="button" class="btn btn-danger" (click)="cancel( )">cancel</button>
+        </div>
+        <br />
+
+        <span class="label label-warning">{{'Remaining items:'+ (remainingItemsCount)}}</span>
+
+        <div *ngIf="selectedItem">
+            <h2>{{selectedItem.name}} details!</h2>
+            <div>
+                <label>id: </label>{{selectedItem.id}}
+            </div>
+            <div>
+                <label>name: </label>
+                <input [(ngModel)]="selectedItem.name" (focusout)="updateName(selectedItem)" placeholder="name" />
+            </div>
+            <div>
+                <label>type: </label>
+                <select [(ngModel)]="selectedItem.itemType.id" (change)="changeSelectedItemType($event)">
+                    <option *ngFor="#type of types" value="{{type.id}}">{{type.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <h2>ToDo</h2>
+        <ul class="itemes">
+            <li *ngFor="#item of unDoneItems; #i=index" class="" [ngClass]="getSelectedClass(item)">
+                <input type="checkbox" (change)="onChange(item)" [(ngModel)]="item.isDone" title="Mark as done" />
+                <span class="label pointer" (click)="onSelect(item)" [ngClass]="setClass(item)">{{item.name}}</span>
+                <span class="label label-warning">{{item.itemType.name}}</span>
+            </li>
+        </ul>
+        <hr />
+        <h2>Done</h2>
+        <ul class="itemes">
+            <li *ngFor="#item of doneItems; #i=index" class="" (click)="onSelect(item)" [ngClass]="getSelectedClass(item)">
+                <input type="checkbox" (change)="onChange(item)" [(ngModel)]="item.isDone" title="Mark as done" />
+                <span class="label completed" [ngClass]="setClass(item)">{{item.name}}</span>
+                <span class="label label-warning">{{item.itemType.name}}</span>
+            </li>
+        </ul>
+
+    </div>
+
+    <button type="button" class="btn btn-danger" (click)="openModal()">Open</button>
+    <!--END jumbotron-->
+    <!-- Modal -->
+
+    <div class="modal-dialog">
+        <!--<div class="modal fade in" id="myModal" role="dialog" style="display: block;">-->
+        <div id="myModal" class="modal fade" role="dialog" [ngClass]="modal.modalClass" [style.display]="modal.modelDisplay">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+                        <h4 class="modal-title">{{modal.modalHeader}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{modal.modalBody}}</p>
+
+                        <div [style.display]="modal.promtDisplay">
+                            <input type="text" [(ngModel)]="modal.promptResult" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" [style.display]="modal.cancelButtonDisplay" (click)="modal.cancelModal()">Cancel</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.hideModal()">OK</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-backdrop fade in" [style.display]="modal.backDropDisplay"></div>
+        <!--END Modal -->
+    </div>
+

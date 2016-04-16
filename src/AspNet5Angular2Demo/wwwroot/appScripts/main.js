@@ -5,6 +5,6 @@
 "use strict";
 ///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
 var browser_1 = require('angular2/platform/browser');
-var App_Todo_1 = require('./Todo/App.Todo');
-browser_1.bootstrap(App_Todo_1.TodoApp);
+var AppComponent_1 = require('./Todo/AppComponent');
+browser_1.bootstrap(AppComponent_1.AppComponent);
 //# sourceMappingURL=main.js.map

@@ -5,5 +5,5 @@
 
 ///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
 import {bootstrap} from 'angular2/platform/browser'
-import {TodoApp} from './Todo/App.Todo'
-bootstrap(TodoApp);
+import {AppComponent} from './Todo/AppComponent'
+bootstrap(AppComponent);

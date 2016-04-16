@@ -4,7 +4,7 @@ import {Component} from 'angular2/core';
 
 @Component({
     selector: 'user-item',
-    templateUrl: "/Todo/User/User.html",
+    templateUrl: "/Todo/User.html",
     inputs: ['user']
 })
 export class UserComponent  {

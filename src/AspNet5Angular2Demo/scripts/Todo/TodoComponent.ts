@@ -161,13 +161,11 @@ export class TodoComponent implements OnInit {
         var data = JSON.stringify(this.newItem);
         this.http.post(this.config.apiBaseUrl + "Todo", data, {
             headers: this.headers
-        })
-            .map(res => res.json())
+        }).map(res => res.json())
             .subscribe(
             data => this.saveCallback(data),
             err => console.log(err),
-            () => { }
-            );
+            () => { });
     }
 
     saveCallback(data: any) {

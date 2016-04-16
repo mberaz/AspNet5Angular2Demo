@@ -116,8 +116,7 @@ var TodoComponent = (function () {
         var data = JSON.stringify(this.newItem);
         this.http.post(this.config.apiBaseUrl + "Todo", data, {
             headers: this.headers
-        })
-            .map(function (res) { return res.json(); })
+        }).map(function (res) { return res.json(); })
             .subscribe(function (data) { return _this.saveCallback(data); }, function (err) { return console.log(err); }, function () { });
     };
     TodoComponent.prototype.saveCallback = function (data) {

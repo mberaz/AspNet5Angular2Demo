@@ -19,7 +19,7 @@ var UserEditComponent = (function () {
     }
     UserEditComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var id = +this._routeParams.get('id');
+        var id = +this._routeParams.get("id");
         this.UserService.getUser(id)
             .then(function (user) { return _this.loadAUser(user); });
     };
@@ -30,6 +30,12 @@ var UserEditComponent = (function () {
         window.history.back();
     };
     UserEditComponent.prototype.SaveNewUser = function (user) {
+        var _this = this;
+        this.UserService.createUser(user).map(function (res) { return res.json(); })
+            .subscribe(function (data) { return _this.saveCallback(data); }, function (err) { return console.log(err); }, function () { });
+    };
+    UserEditComponent.prototype.saveCallback = function (data) {
+        alert("ok");
     };
     UserEditComponent = __decorate([
         core_1.Component({

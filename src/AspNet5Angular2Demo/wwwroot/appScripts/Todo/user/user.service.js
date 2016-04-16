@@ -9,11 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
+var http_1 = require("angular2/http");
 require('rxjs/Rx');
 var UserService = (function () {
-    function UserService() {
+    function UserService(_http) {
+        this._http = _http;
+        this.options = new http_1.RequestOptions();
+        this.http = _http;
+        this.headers = new http_1.Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.options = new http_1.RequestOptions({ headers: this.headers });
     }
-    //constructor(private http: Http) { }
     UserService.prototype.getUsers = function () {
         var config = new Config();
         var urls = [config.apiBaseUrl + "User"];
@@ -25,14 +31,18 @@ var UserService = (function () {
     UserService.prototype.getUser = function (id) {
         var config = new Config();
         var url = config.apiBaseUrl + "User/" + id;
-        return Promise.resolve(fetch(url).then(function (resp) {
-            return resp.json();
-        }));
+        return Promise.resolve(fetch(url).then(function (resp) { return resp.json(); }));
     };
     ;
+    UserService.prototype.createUser = function (user) {
+        var config = new Config();
+        return this.http.post(config.apiBaseUrl + "User", JSON.stringify(user), {
+            headers: this.headers
+        });
+    };
     UserService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], UserService);
     return UserService;
 }());

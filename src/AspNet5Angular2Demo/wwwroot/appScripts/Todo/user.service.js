@@ -1,4 +1,3 @@
-/// <reference path="../../node_modules/angular2/http.d.ts" />
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,13 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-//import {Http, HTTP_BINDINGS, Headers, RequestOptions, Response, HTTP_PROVIDERS} from "angular2/http";
-//import {Observable}     from 'rxjs/Observable';
+var http_1 = require("angular2/http");
 require('rxjs/Rx');
 var UserService = (function () {
-    function UserService() {
+    function UserService(http) {
+        this.http = http;
     }
-    //constructor(private http: Http) { }
     UserService.prototype.getUsers = function () {
         var config = new Config();
         var urls = [config.apiBaseUrl + "User"];
@@ -28,14 +26,19 @@ var UserService = (function () {
     UserService.prototype.getUser = function (id) {
         var config = new Config();
         var url = config.apiBaseUrl + "User/" + id;
-        return Promise.resolve(fetch(url).then(function (resp) {
-            return resp.json();
-        }));
+        return Promise.resolve(fetch(url).then(function (resp) { return resp.json(); }));
+    };
+    ;
+    UserService.prototype.createUser = function (data, http) {
+        var config = new Config();
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return http.post(config.apiBaseUrl + "User", data, options).toPromise();
     };
     ;
     UserService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], UserService);
     return UserService;
 }());

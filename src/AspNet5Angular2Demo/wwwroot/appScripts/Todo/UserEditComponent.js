@@ -39,7 +39,7 @@ var UserEditComponent = (function () {
     };
     UserEditComponent.prototype.extractData = function (res) {
         if (res.status < 200 || res.status >= 300) {
-            throw new Error('Bad response status: ' + res.status);
+            throw new Error("Bad response status: " + res.status);
         }
         var body = res.json();
         var data = body.data || {};
